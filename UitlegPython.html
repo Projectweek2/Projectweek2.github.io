@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <link rel="icon" href="LogoWebsite.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Academie for Kids</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            color: #fff;
+            margin: 0;
+            height: 100vh;
+        }
+
+        /* Default styling for the body */
+        body.default {
+            background-color: #222;
+        }
+
+        /* Uzoth's specific styling */
+        body.uzoth {
+            background: url('Uzoth.gif') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.7);
+            padding: 20px 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar li {
+            position: relative;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 10px;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s ease;
+            color: #FF4F4F; /* Red for navbar text */
+        }
+
+        .navbar li::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #FF4F4F; /* Red */
+            bottom: -5px;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar li:hover::before {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .navbar li:hover {
+            color: #FFB200; /* Lighter gold-orange on hover */
+            transform: translateY(-5px);
+        }
+
+        .navbar button {
+            background-color: #FF4F4F;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .navbar button:hover {
+            transform: scale(1.1);
+            background-color: #FFB200; /* Hover effect with gold */
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .navbar button a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .navbar button:hover a {
+            color: #111;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding-top: 80px; /* Space for the navbar */
+            text-align: center;
+        }
+
+        .title {
+            font-size: 40px;
+            color: #FF4F4F;
+            font-weight: bold;
+            text-shadow: 3px 3px 5px rgba(255, 79, 79, 0.8);
+        }
+
+    </style>
+</head>
+<body id="body">
+
+    <div class="navbar">
+        <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="OverOns.html">Over Ons</a></li>
+            <li><a href="UitlegHtml.html">Html</a></li>
+            <li><a href="UitlegCSS.html">CSS</a></li>
+            <li class="active">Python</li>
+            <li><a href="UitlegJavaScript.html">JavaScript</a></li>
+        </ul>
+        <button id="userBtn"><a href="index.html">Get Started</a></button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let username = localStorage.getItem("username");
+            let body = document.getElementById("body");
+            let button = document.getElementById("userBtn");
+
+            if (username) {
+                button.innerHTML = username;
+                button.onclick = function () {
+                    logoutPrompt();
+                };
+
+                if (username === "Uzoth") {
+                    body.classList.add("uzoth");  // Apply Uzoth's custom style
+                } else {
+                    body.classList.add("default"); // Apply the default style for other users
+                }
+            }
+        });
+
+        function logoutPrompt() {
+            let confirmLogout = confirm("Wil je uitloggen?");
+            if (confirmLogout) {
+                localStorage.removeItem("username");
+                localStorage.removeItem("isAdmin");
+                window.location.href = "index.html";
+            }
+        }
+    </script>
+
+<script>
+    if (!localStorage.getItem("username")) {
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>
