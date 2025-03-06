@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <link rel="icon" href="LogoWebsite.jpg" type="image/jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Python Quiz - Leren Programmeren</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: linear-gradient(to right, rgb(9, 174, 245), rgb(3, 178, 253), rgb(131, 6, 131), rgb(123, 5, 123));
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        #nav {
+            background-color: rgb(193, 185, 185);
+            border-radius: 25px;
+            padding: 10px;
+            width: 60%;
+            text-align: center;
+            margin: 20px auto;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: rgb(0, 191, 255);
+            font-family: Arial, Helvetica, sans-serif;
+            border-radius: 25px;
+            border: 1.5px solid black;
+            width: 150px;
+            height: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: rgb(5, 97, 128);
+            border-color: white;
+            transform: scale(1.1);
+        }
+
+        .quiz-container {
+            background-color: rgba(128, 128, 128, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            width: 60%;
+            margin: 20px auto;
+            text-align: center;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .options button {
+            display: block;
+            margin: 10px auto;
+            width: 70%;
+        }
+
+        .feedback {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <button style="position: absolute; left: 1%;" onclick="window.location.href='index.html'">Home</button>
+    <h1>Python Quiz</h1>
+    <div id="nav">Kies een niveau en begin de quiz!</div>
+    <div class="button-container">
+        <button onclick="startQuiz(1)">Niveau 1</button>
+        <button onclick="startQuiz(2)">Niveau 2</button>
+        <button onclick="startQuiz(3)">Niveau 3</button>
+        <button onclick="startQuiz(4)">Niveau 4</button>
+        <button onclick="startQuiz(5)">Niveau 5</button>
+    </div>
+    <div class="quiz-container" id="quiz-container" style="display:none;">
+        <p class="question" id="question"></p>
+        <div class="options" id="options"></div>
+        <p class="feedback" id="feedback"></p>
+    </div>
+    <script>
+        const quizData = {
+           "1": [
+        { "question": "Hoe print je iets op het scherm in Python?", "options": ["print('Hallo!')", "echo 'Hallo!'", "console.log('Hallo!')"], "answer": 0 },
+        { "question": "Hoe maak je een variabele in Python?", "options": ["x = 5", "var x = 5", "int x = 5"], "answer": 0 },
+        { "question": "Welke extensie heeft een Python-bestand?", "options": [".py", ".txt", ".exe"], "answer": 0 },
+        { "question": "Hoe maak je een commentaar in Python?", "options": ["# Dit is een comment", "// Dit is een comment", "/* Dit is een comment */"], "answer": 0 },
+        { "question": "Welke functie gebruik je om invoer van een gebruiker te vragen?", "options": ["input()", "read()", "get()"], "answer": 0 }
+    ],
+    "2": [
+        { "question": "Welke operator gebruik je voor optellen in Python?", "options": ["+", "-", "*"], "answer": 0 },
+        { "question": "Hoe maak je een lijst in Python?", "options": ["[1, 2, 3]", "{1, 2, 3}", "(1, 2, 3)"], "answer": 0 },
+        { "question": "Welke waarde betekent 'waar' in Python?", "options": ["True", "False", "Yes"], "answer": 0 },
+        { "question": "Wat is de output van print(2 * 3)?", "options": ["6", "5", "8"], "answer": 0 },
+        { "question": "Welke functie gebruik je om de lengte van een lijst te krijgen?", "options": ["len()", "size()", "count()"], "answer": 0 }
+    ],
+    "3": [
+        { "question": "Welke lus gebruik je om iets meerdere keren uit te voeren?", "options": ["for", "repeat", "do"], "answer": 0 },
+        { "question": "Hoe controleer je of x groter is dan 5?", "options": ["if x > 5:", "if x => 5:", "if (x > 5)"], "answer": 0 },
+        { "question": "Wat is de output van print('3' + '3')?", "options": ["'33'", "6", "Foutmelding"], "answer": 0 },
+        { "question": "Hoe voeg je een element toe aan een lijst?", "options": ["append()", "add()", "insert()"], "answer": 0 },
+        { "question": "Welke functie gebruik je om een geheel getal te maken?", "options": ["int()", "str()", "float()"], "answer": 0 }
+    ],
+    "4": [
+        { "question": "Hoe definieer je een functie in Python?", "options": ["def mijn_functie():", "function mijn_functie():", "define mijn_functie():"], "answer": 0 },
+        { "question": "Hoe geef je een functie een waarde terug?", "options": ["return", "output", "give"], "answer": 0 },
+        { "question": "Welke fout treedt op bij deling door nul?", "options": ["ZeroDivisionError", "SyntaxError", "TypeError"], "answer": 0 },
+        { "question": "Hoe controleer je de lengte van een string?", "options": ["len()", "size()", "length()"], "answer": 0 },
+        { "question": "Welke functie gebruik je om een string om te zetten naar hoofdletters?", "options": ["upper()", "capitalize()", "big()"], "answer": 0 }
+    ],
+    "5": [
+        { "question": "Hoe open je een bestand in Python om te lezen?", "options": ["open('file.txt', 'r')", "read('file.txt')", "file('file.txt')"], "answer": 0 },
+        { "question": "Hoe controleer je of een sleutel in een dictionary bestaat?", "options": ["key in dict", "dict.hasKey()", "exists(dict, key)"], "answer": 0 },
+        { "question": "Wat is de output van print(type(5))?", "options": ["<class 'int'>", "integer", "int"], "answer": 0 },
+        { "question": "Wat doet 'range(5)' in een for-lus?", "options": ["Geeft 0 t/m 4", "Geeft 1 t/m 5", "Geeft 0 t/m 5"], "answer": 0 },
+        { "question": "Hoe voeg je twee lijsten samen?", "options": ["list1 + list2", "combine(list1, list2)", "merge(list1, list2)"], "answer": 0 }
+    ]
+        };
+
+        let currentLevel, currentQuestionIndex, score, shuffledQuestions;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function startQuiz(level) {
+            currentLevel = level;
+            currentQuestionIndex = 0;
+            score = 0;
+            shuffledQuestions = [...quizData[level]];
+            shuffleArray(shuffledQuestions);
+            document.getElementById("quiz-container").style.display = "block";
+            document.getElementById("feedback").innerText = "";
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= shuffledQuestions.length) {
+                document.getElementById("feedback").innerText = `Je hebt ${score} van de ${shuffledQuestions.length} vragen goed!`;
+                return;
+            }
+            
+            const questionObj = shuffledQuestions[currentQuestionIndex];
+            document.getElementById("question").innerText = questionObj.question;
+            
+            const optionsContainer = document.getElementById("options");
+            optionsContainer.innerHTML = "";
+            
+            let shuffledOptions = [...questionObj.options];
+            shuffleArray(shuffledOptions);
+            
+            shuffledOptions.forEach(opt => {
+                const btn = document.createElement("button");
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt, questionObj);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected, questionObj) {
+            if (selected === questionObj.options[questionObj.answer]) {
+                score++;
+                document.getElementById("feedback").innerText = "Goed gedaan! ✅";
+            } else {
+                document.getElementById("feedback").innerText = "Fout! ❌";
+            }
+            currentQuestionIndex++;
+            setTimeout(loadQuestion, 1000);
+        }
+    </script>
+    <script>
+        function checkAnswer(selected, questionObj) {
+        if (selected === questionObj.options[questionObj.answer]) {
+            score++;
+            document.getElementById("feedback").innerText = "Goed gedaan! ✅";
+        } else {
+            document.getElementById("feedback").innerText = "Fout! ❌";
+        }
+        currentQuestionIndex++;
+    
+        // Opslaan in localStorage
+        localStorage.setItem("quizScore", score);
+        localStorage.setItem("quizTotal", shuffledQuestions.length);
+    
+        setTimeout(loadQuestion, 1000);
+    }
+    
+    </script>
+</body>
+</html>

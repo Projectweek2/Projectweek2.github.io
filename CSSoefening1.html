@@ -1,0 +1,61 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="LogoWebsite.jpg" type="image/jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oefening 1 - CSS - Leren Programmeren - Projectweek 2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="nav">
+    <button onclick="window.location.href='index.html'">Home</button>
+    <button onclick="window.location.href='overzicht.html'">Mijn overzicht</button>
+    <button onclick="window.location.href = 'talenoverzicht.html'">Talenoverzicht</button>
+  </div>
+  <h1>CSS</h1>
+  <p>Uitleg 1 en Oefening 1</p>
+  <br>
+  <p>Welkom bij de cursus van CSS! Hier leer je hoe je de website écht cool kan maken, want de standaard HTML-stijl is best wel lelijk.</p>
+  <br>
+  <div><p>Om te beginnen, moet je het HTML-bestand laten weten dat je CSS wilt gebruiken. Dit doe je op twee manieren. Of je zegt het volgende in je bestand: <pre><code>&lt;style&gt;Hier kan je de CSS in stoppen, die je hier leert in deze cursus&lt;/style&gt;</code></pre> Ook kan je dit in de head zetten: <pre><code>&lt;link&gt;rel="stylesheet" href="style.css"></code></pre></p></div>
+  <br>
+  <br>
+  <p>Vervolgens kan je in deze stylesheets de data van objecten en stijlen geven. Dit kan je als volgt doen:</p>
+  <div class="csscontainer">
+    <pre><code>&lt;style&gt;
+      body {
+        color: red;
+        background-color: blue;
+      }
+      &lt;/style&gt;</code></pre>
+  </div>
+<br>
+<p>Je moet eerst het object geven wat je wilt stijlen, in dit geval de body. Dit is dus de hele pagina. Zo zou je nu tekst in het rood krijgen en de achtergrondkleur in het blauw. Ook kan je een div stijlen. Dit doe je met #container of .container. Een # is id, een . is class. Hieronder zie je een aantal voorbeelden met dingen die je zou kunnen stijlen en op welke manier:</p>
+<br>
+<div class="csscontainer">
+  <pre><code>&lt;style&gt;
+    #textcontainer {  /* Dit is een tekstvak */
+      color: red;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 18;
+      background-color: blue;
+    }
+
+    button {
+      height: 50px;
+      background-color: lightblue;
+      border-radius: 25px; /* Dit is hoe rond de knop is*/
+      border-style: solid; /* Dit zorgt ervoor dat de border er hetzelfde uitziet, en niet met rare lijnen*/
+      border-width: 5px;
+    }
+    &lt;/style&gt;</code></pre>
+</div>
+<br>
+<p>Dit zijn gewoon wat voorbeelden hoe je een tekstvak en knop zou kunnen stijlen.</p>
+<p>Als je denkt er klaar voor te zijn, kan je met onderstaande knop de oefening starten. Je zult onderweg vragen beantwoorden, en je kan je voortgang volgen op de pagina Mijn Overzicht.</p>
+<br>
+<button id="index-button" onclick="window.location.href = 'VragenCSS.html'">Start oefening</button>
+<br>
+</body>
+</html>

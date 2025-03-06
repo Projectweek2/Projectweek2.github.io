@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <link rel="icon" href="LogoWebsite.jpg" type="image/jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>CSS Quiz -  Leren Programmeren</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: linear-gradient(to right, rgb(9, 174, 245), rgb(3, 178, 253), rgb(131, 6, 131), rgb(123, 5, 123));
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        #nav {
+            background-color: rgb(193, 185, 185);
+            border-radius: 25px;
+            padding: 10px;
+            width: 60%;
+            text-align: center;
+            margin: 20px auto;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: rgb(0, 191, 255);
+            font-family: Arial, Helvetica, sans-serif;
+            border-radius: 25px;
+            border: 1.5px solid black;
+            width: 150px;
+            height: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: rgb(5, 97, 128);
+            border-color: white;
+            transform: scale(1.1);
+        }
+
+        .quiz-container {
+            background-color: rgba(128, 128, 128, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            width: 60%;
+            margin: 20px auto;
+            text-align: center;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .options button {
+            display: block;
+            margin: 10px auto;
+            width: 70%;
+        }
+
+        .feedback {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <button style="position: absolute; left: 1%;" onclick="window.location.href='index.html'">Home</button>
+    <h1>CSS Quiz</h1>
+    <div id="nav">Kies een niveau en begin de quiz!</div>
+    <div class="button-container">
+        <button onclick="startQuiz(1)">Niveau 1</button>
+        <button onclick="startQuiz(2)">Niveau 2</button>
+        <button onclick="startQuiz(3)">Niveau 3</button>
+        <button onclick="startQuiz(4)">Niveau 4</button>
+        <button onclick="startQuiz(5)">Niveau 5</button>
+    </div>
+    <div class="quiz-container" id="quiz-container" style="display:none;">
+        <p class="question" id="question"></p>
+        <div class="options" id="options"></div>
+        <p class="feedback" id="feedback"></p>
+    </div>
+    <script>
+        const quizData = {
+"1": [
+        { "question": "Waarvoor staat CSS?", "options": ["Cascading Style Sheets", "Computer Style Sheets", "Creative Style System"], "answer": 0 },
+        { "question": "Hoe selecteer je alle <p>-elementen in CSS?", "options": ["p {}", ".p {}", "#p {}"], "answer": 0 },
+        { "question": "Welke eigenschap gebruik je om de tekstkleur te veranderen?", "options": ["color", "background-color", "text-color"], "answer": 0 },
+        { "question": "Met welke eigenschap pas je de achtergrondkleur aan?", "options": ["background-color", "color", "bgcolor"], "answer": 0 },
+        { "question": "Welke CSS-eigenschap gebruik je om de grootte van de tekst te wijzigen?", "options": ["font-size", "text-size", "size"], "answer": 0 }
+    ],
+    "2": [
+        { "question": "Hoe selecteer je een element met id 'container'?", "options": ["#container", ".container", "container"], "answer": 0 },
+        { "question": "Welke eigenschap gebruik je om een rand rond een element te maken?", "options": ["border", "outline", "frame"], "answer": 0 },
+        { "question": "Welke CSS-eenheid staat voor relatieve grootte ten opzichte van de ouder?", "options": ["em", "px", "cm"], "answer": 0 },
+        { "question": "Welke waarde van position plaatst een element relatief ten opzichte van zijn normale positie?", "options": ["relative", "absolute", "fixed"], "answer": 0 },
+        { "question": "Hoe maak je tekst vetgedrukt in CSS?", "options": ["font-weight: bold;", "text-bold: true;", "bold: yes;"], "answer": 0 }
+    ],
+    "3": [
+        { "question": "Welke eigenschap gebruik je om de afstand tussen de letters aan te passen?", "options": ["letter-spacing", "word-spacing", "line-height"], "answer": 0 },
+        { "question": "Welke CSS-regel zorgt ervoor dat een element altijd bovenop andere elementen blijft?", "options": ["z-index", "top-layer", "priority"], "answer": 0 },
+        { "question": "Welke CSS-eigenschap bepaalt de ruimte binnen de rand van een element?", "options": ["padding", "margin", "border-spacing"], "answer": 0 },
+        { "question": "Welke CSS-selector selecteert alleen de directe kinderen van een element?", "options": [">", "+", "~"], "answer": 0 },
+        { "question": "Met welke CSS-eigenschap verander je een blokelement in een inline-element?", "options": ["display", "visibility", "inline"], "answer": 0 }
+    ],
+    "4": [
+        { "question": "Welke CSS-eigenschap maakt een element transparant?", "options": ["opacity", "visibility", "alpha"], "answer": 0 },
+        { "question": "Welke waarde van display zorgt ervoor dat een element verdwijnt maar ruimte blijft innemen?", "options": ["visibility: hidden;", "display: none;", "opacity: 0;"], "answer": 0 },
+        { "question": "Welke pseudo-klasse wordt gebruikt om een element te stijlen wanneer je er met de muis overheen gaat?", "options": [":hover", ":active", ":focus"], "answer": 0 },
+        { "question": "Met welke CSS-eigenschap voeg je een schaduw toe aan een tekst?", "options": ["text-shadow", "box-shadow", "shadow"], "answer": 0 },
+        { "question": "Welke CSS-eigenschap gebruik je om meerdere achtergronden te definiëren?", "options": ["background", "multi-background", "backgrounds"], "answer": 0 }
+    ],
+    "5": [
+        { "question": "Wat doet de CSS-eigenschap 'flex-grow'?", "options": ["Bepaalt hoeveel een flex-item groeit", "Maakt een element flexibel", "Vergroot de lettergrootte"], "answer": 0 },
+        { "question": "Welke CSS-eigenschap gebruik je om een grid-container te definiëren?", "options": ["display: grid;", "grid: true;", "grid-layout: on;"], "answer": 0 },
+        { "question": "Welke waarde van 'position' zorgt ervoor dat een element zijn positie behoudt bij scrollen?", "options": ["fixed", "absolute", "sticky"], "answer": 0 },
+        { "question": "Welke CSS-functie gebruik je om een overgangseffect toe te voegen?", "options": ["transition", "animate", "effect"], "answer": 0 },
+        { "question": "Welke CSS-eigenschap gebruik je om een animatie te maken?", "options": ["@keyframes", "animation", "motion"], "answer": 1 }
+    ]
+        };
+
+        let currentLevel, currentQuestionIndex, score, shuffledQuestions;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function startQuiz(level) {
+            currentLevel = level;
+            currentQuestionIndex = 0;
+            score = 0;
+            shuffledQuestions = [...quizData[level]];
+            shuffleArray(shuffledQuestions);
+            document.getElementById("quiz-container").style.display = "block";
+            document.getElementById("feedback").innerText = "";
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= shuffledQuestions.length) {
+                document.getElementById("feedback").innerText = `Je hebt ${score} van de ${shuffledQuestions.length} vragen goed!`;
+                return;
+            }
+            
+            const questionObj = shuffledQuestions[currentQuestionIndex];
+            document.getElementById("question").innerText = questionObj.question;
+            
+            const optionsContainer = document.getElementById("options");
+            optionsContainer.innerHTML = "";
+            
+            let shuffledOptions = [...questionObj.options];
+            shuffleArray(shuffledOptions);
+            
+            shuffledOptions.forEach(opt => {
+                const btn = document.createElement("button");
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt, questionObj);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected, questionObj) {
+            if (selected === questionObj.options[questionObj.answer]) {
+                score++;
+                document.getElementById("feedback").innerText = "Goed gedaan! ✅";
+            } else {
+                document.getElementById("feedback").innerText = "Fout! ❌";
+            }
+            currentQuestionIndex++;
+            setTimeout(loadQuestion, 1000);
+        }
+    </script>
+<script>
+    function checkAnswer(selected, questionObj) {
+    if (selected === questionObj.options[questionObj.answer]) {
+        score++;
+        document.getElementById("feedback").innerText = "Goed gedaan! ✅";
+    } else {
+        document.getElementById("feedback").innerText = "Fout! ❌";
+    }
+    currentQuestionIndex++;
+
+    // Opslaan in localStorage
+    localStorage.setItem("quizScore", score);
+    localStorage.setItem("quizTotal", shuffledQuestions.length);
+
+    setTimeout(loadQuestion, 1000);
+}
+
+</script>
+</body>
+</html>

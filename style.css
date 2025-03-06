@@ -1,0 +1,103 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: linear-gradient(to right, rgb(9, 174, 245), rgb(3, 178, 253), rgb(131, 6, 131), rgb(123, 5, 123));
+  color: white;
+}
+
+#nav {
+  background-color: rgb(193, 185, 185);
+  border-radius: 25px;
+  padding: 0.50%;
+  width: fit-content;
+  text-align: center;
+  justify-content: center;
+  place-content: center;
+  margin: 0 auto;
+}
+
+button {
+  background-color: rgb(0, 191, 255);
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: 1.50px;
+  border-color: black;
+  width: 130px;
+  height: 40px;
+}
+
+button:hover {
+  background-color: rgb(5, 97, 128);
+  border-color: white;
+  transition: 0.4s;
+}
+
+#overview {
+  width: 70%;
+  height: 70%;
+  text-align: center;
+  background-color: gray;
+  border-radius: 20px;
+  border-width: 21.50px;
+  border-color: black;
+  font-size: 56;
+}
+
+#index-button {
+  background-image: linear-gradient( to right, rgb(6, 136, 191), rgb(15, 170, 237), rgb(210, 17, 210), rgb(122, 3, 122));
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 35px;
+  border-style: solid;
+  border-width: 1.50px;
+  border-color: black;
+  width: 190px;
+  height: 100px;
+  color: white;
+  font-size: 20px;
+}
+
+#index-button:hover {
+  background-image: linear-gradient( to right, rgb(22, 133, 181), rgb(13, 106, 146), rgb(131, 6, 131), rgb(79, 3, 79));
+  border-color: white;
+  transition: 0.4s;
+}
+p {
+  font-size: 20px;
+  font-family: 'Calibri', 'Gill Sans';
+}
+h1 {
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+.htmlcontainer {
+  background-color: grey;
+  border-radius: 25px;
+  padding: 0.60%;
+  width: fit-content;
+}
+
+.csscontainer {
+  background-color: gray;
+  border-radius: 25px;
+  padding: 0.80%;
+  width: fit-content;
+  font-size: x-large;
+}
+
+.verticalcontainer {
+  background-color: gray;
+  border-radius: 25px;
+  padding: 0.80%;
+  width: fit-content;
+  font-size: x-large;
+  display: flex;
+  gap: 5%;
+}
+
+a {
+  background-color: rgb(220, 220, 7);
+  color: blue;
+  text-decoration: none;
+  border-radius: 7.50px;
+}

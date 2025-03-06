@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <link rel="icon" href="LogoWebsite.jpg" type="image/jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Resultaten</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: linear-gradient(to right, rgb(9, 174, 245), rgb(3, 178, 253), rgb(131, 6, 131), rgb(123, 5, 123));
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .result-container {
+            background-color: rgba(128, 128, 128, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            width: 50%;
+            margin: 50px auto;
+            text-align: center;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        button {
+            background-color: rgb(0, 191, 255);
+            border-radius: 25px;
+            border: 1.5px solid black;
+            width: 150px;
+            height: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: rgb(5, 97, 128);
+            border-color: white;
+            transform: scale(1.1);
+        }
+
+        .delete-btn {
+            background-color: rgb(255, 0, 0);
+            margin-top: 20px;
+        }
+
+        .delete-btn:hover {
+            background-color: rgb(200, 0, 0);
+        }
+    </style>
+</head>
+<body>
+    <button onclick="window.location.href='index.html'">Home</button>
+    <h1>Quiz Resultaten</h1>
+    <div class="result-container">
+        <h2>Jouw score:</h2>
+        <p id="resultText">Laden...</p>
+        <canvas id="resultChart"></canvas>
+        <!-- Delete Results button -->
+        <button class="delete-btn" onclick="deleteResults()">Verwijder Resultaten</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Haal resultaten op uit localStorage
+        const score = localStorage.getItem("quizScore");
+        const total = localStorage.getItem("quizTotal");
+
+        function updateResults() {
+            if (score !== null && total !== null) {
+                document.getElementById("resultText").innerText = `Je hebt ${score} van de ${total} vragen goed!`;
+
+                // Maak een cirkeldiagram
+                const ctx = document.getElementById("resultChart").getContext("2d");
+                new Chart(ctx, {
+                    type: "doughnut",
+                    data: {
+                        labels: ["Goed", "Fout"],
+                        datasets: [{
+                            data: [score, total - score],
+                            backgroundColor: ["#4CAF50", "#FF5733"]
+                        }]
+                    }
+                });
+            } else {
+                document.getElementById("resultText").innerText = "Nog geen quizresultaten gevonden.";
+                const ctx = document.getElementById("resultChart").getContext("2d");
+                new Chart(ctx, {
+                    type: "doughnut",
+                    data: {
+                        labels: ["Goed", "Fout"],
+                        datasets: [{
+                            data: [0, 0],
+                            backgroundColor: ["#4CAF50", "#FF5733"]
+                        }]
+                    }
+                });
+            }
+        }
+
+        updateResults(); // Initial call to update the page with stored results
+
+        // Functie om resultaten te verwijderen
+        function deleteResults() {
+            localStorage.removeItem("quizScore");
+            localStorage.removeItem("quizTotal");
+            window.location.reload();
+            updateResults();
+        }
+</script>
+</body>
+</html>
